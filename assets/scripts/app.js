@@ -21,14 +21,29 @@
  * const totalUsers = 15
  * totalUsers = 13 <-- no
  * 
+ * 데이터 타입(Data Type)
+ * Number:
+ *   2, -3, 22.956, ...
+ * String(Text):
+ *   'Hi', "Hi", `Hi`
  */ 
 
 /**
  * js에서는 변수에 값을 할당하여 꼭 초기화를 할 필요가 없음.
  */
+const defaultResult = 0; //상수 선언
+
 let currentResultEX; // 초기화가 안된 상태
 let currentResult = 0; //초기화 된 상태 --> 0으로 초기화함.
+currentResult = defaultResult; // 상수를 currentResult에 넣음
 
-currentResult = (currentResult + 10) * 3 / 2 -1; // 재할당함.
+currentResult = (currentResult + 50) * 3 / 2 -1; // 재할당함.
 
-outputResult(currentResult, '');
+let calculationDescription = `(${defaultResult} + 10) * 3 / 2 - 1`; //템플릿 리터럴
+let errorMessage = 'An error\'' + ' occured!' // 이스케이프 문자 목록
+
+outputResult(currentResult, calculationDescription);
+
+/**
+ * 함수(Function): 
+ */
