@@ -58,56 +58,80 @@ function writeToLog(operationIdentifier, prevResult, operationNumber, newResult)
     console.log(logEntries);
 }
 
+function calculateResult(calculationType) {
+    const enteredNumber = getUserNumberInput();
+
+    if(
+        calculationType !== 'ADD' &&
+        calculationType !== 'SUBTRACT' &&
+        calculationType !== 'MULTIPLY' &&
+        calculationType !== 'DIVIDE' ||
+        !enteredNumber //0을 제외한 모든 값 -> 0이 아니라면 false로 처리함
+    ) {
+        return;
+    }
+
+    const initialResult = currentResult;
+    let mathOperator;
+
+    if(calculationType === 'ADD') {
+        currentResult += enteredNumber;
+        mathOperator = '+';
+    } else if(calculationType === 'SUBTRACT') {
+        currentResult -= enteredNumber;
+        mathOperator = '-';
+    } else if(calculationType === 'MULTIPLY') {
+        currentResult *= enteredNumber;
+        mathOperator = '*';
+    } else if(calculationType === 'DIVIDE') {
+        currentResult /= enteredNumber;
+        mathOperator = '/';
+    }
+
+    createAndWriteOutput(mathOperator, initialResult, enteredNumber);
+    writeToLog(calculationType, initialResult, enteredNumber, currentResult);
+}
+
 function add() {
     //파라미터 이름은 맘대로 지어도 됨.
     //파라미터로 정의한 변수는 함수 내부에서만 쓸 수 있음.
     //파라미터는 let or const 키워드도 필요없음.
-    const enteredNumber = getUserNumberInput();
-    const initialResult = currentResult;
+    // const enteredNumber = getUserNumberInput();
+    // const initialResult = currentResult;
     // const calcDescription = `${currentResult} + ${enteredNumber}`;
 
     // 문자열 변환 -> .toString(), 정수형 변환 -> parseInt()
     // currentResult = currentResult + enteredNumber;
     // currentResult++;
-    currentResult += enteredNumber;
+    // currentResult += enteredNumber;
     // outputResult(currentResult, calcDescription);
-    createAndWriteOutput('+', initialResult, enteredNumber);
+    // createAndWriteOutput('+', initialResult, enteredNumber);
     // const logEntry = {
     //     operator: 'ADD',
     //     prevResult: initialResult,
     //     number: enteredNumber,
     //     result: currentResult
     // };
-    writeToLog('ADD', initialResult, enteredNumber, currentResult);
+    // writeToLog('ADD', initialResult, enteredNumber, currentResult);
     // logEntries.push(logEntry); //push(): 배열 마지막에 밀어넣음. 즉 추가함.
     // console.log(logEntry.operator); //객체.키 -> 밸류값 리턴.
     // console.log(logEntries);
     // console.log(logEntries[0]); // 배열이름[원하는 순서]: 배열의 특정 번호에 있는 값 (배열의 index는 0부터 시작함)
     // return resultValue; //return 문은 결과를 돌려보내면서 함수를 종료하는 선언이기도함.
+
+    calculateResult('ADD');
 } //함수 선언문 뒤에는 세미콜론을 붙이지 않음.
 
 function subtract() {
-    const enteredNumber = getUserNumberInput();
-    const initialResult = currentResult;
-    currentResult -= enteredNumber;
-    createAndWriteOutput('-', initialResult, enteredNumber);
-    writeToLog('SUBTRACT', initialResult, enteredNumber, currentResult);
+    calculateResult('SUBTRACT');
 }
 
 function multiply() {
-    const enteredNumber = getUserNumberInput();
-    const initialResult = currentResult;
-    currentResult *= enteredNumber;
-    createAndWriteOutput('*', initialResult, enteredNumber);
-    writeToLog('MULTYPLY', initialResult, enteredNumber, currentResult);
+    calculateResult('MULTIPLY')
 }
 
 function divide() {
-    const enteredNumber = getUserNumberInput();
-    const initialResult = currentResult;
-    currentResult /= enteredNumber;
-    createAndWriteOutput('/', initialResult, enteredNumber);
-    writeToLog('DIVIDE', initialResult, enteredNumber, currentResult);
+    calculateResult('DIVIDE');
 }
 
 addBtn.addEventListener('click', add);
