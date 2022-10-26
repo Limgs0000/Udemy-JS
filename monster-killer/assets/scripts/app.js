@@ -35,7 +35,10 @@ function strongAttackHandler() {
         alert('You lost!');
     } else if(currentPlayerHealth <= 0 && currentMonsterHealth <= 0) {
         alert('You have a draw!');
+    } else {
+
     }
+
 }
 
 attackBtn.addEventListener('click', attackHandler);
